@@ -1,0 +1,5 @@
+- name: Install Nginx using Role
+  hosts: all
+  become: yes #Enables sudo permissions
+  roles:
+    - nginx_role

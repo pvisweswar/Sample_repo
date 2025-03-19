@@ -1,0 +1,8 @@
+- name: Remove Nginx
+  hosts: all
+  become: yes
+  tasks:
+    - name: Uninstall Nginx
+      apt:
+        name: nginx
+        state: absent

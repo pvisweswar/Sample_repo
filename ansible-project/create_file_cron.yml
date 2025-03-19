@@ -1,0 +1,25 @@
+- name: Schedule a cron job to create a file every 5 minutes
+  hosts: all
+  become: yes  # Run as root (needed for cron jobs)
+  
+  tasks:
+    - name: Ensure the target directory exists
+      file:
+        path: /tmp/myfiles
+        state: directory
+        mode: '0755'
+
+    - name: Create a script to generate the file
+      copy:
+        dest: /tmp/myfiles/create_file.sh
+        content: |
+          #!/bin/bash
+          echo "This file was created at $(date)" > /tmp/myfiles/cron_file.txt
+        mode: '0755'  # Make the script executable
+
+    - name: Schedule the cron job
+      cron:
+        name: "Create file every 1 hour"
+        job: "/tmp/myfiles/create_file.sh"
+        minute: "0"
+        user: "viswa"  # Ensure it runs for viswa

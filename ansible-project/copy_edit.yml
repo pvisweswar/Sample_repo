@@ -1,0 +1,15 @@
+- name: Copy and Edit File
+  hosts: myservers
+  become: yes
+  tasks:
+
+    - name: Copy a file to the host machine
+      copy:
+        src: /home/fission/Desktop/test.txt
+        dest: /home/viswa/test.txt
+        mode: '0644'
+
+    - name: Edit a file (Add a line)
+      lineinfile:
+        path: /home/viswa/test.txt
+        line: "Hello, Viswa! This is Ansible editing a file."
