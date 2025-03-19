@@ -1,8 +1,0 @@
----
-# tasks file for nginx_role
-
-- name: Install Nginx
-  apt:
-    name: nginx
-    state: present
-  become: yes
